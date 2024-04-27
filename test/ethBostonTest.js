@@ -1,7 +1,11 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 const {abi, bytecode} = require("usingtellor/artifacts/contracts/TellorPlayground.sol/TellorPlayground.json");
-// const { format } = require("node:util");
+const { format } = require("node:util");
+const {
+  toBytes,
+  toHexString,
+} = require("./utils.js");
 // const {
 //   conditions,
 //   decrypt,
@@ -10,75 +14,49 @@ const {abi, bytecode} = require("usingtellor/artifacts/contracts/TellorPlaygroun
 //   fromBytes,
 //   getPorterUri,
 //   initialize,
-//   ThresholdMessageKit,
-//   toBytes,
-//   toHexString,
-// } = require('@nucypher/taco');
+//   ThresholdMessageKit
+// } = require("@nucypher/taco");
 
 
-// RPC_PROVIDER_URL= "https://rpc-amoy.polygon.technology"
-// ENCRYPTOR_PRIVATE_KEY="0x900edb9e8214b2353f82aa195e915128f419a92cfb8bbc0f4784f10ef4112b86"
-// CONSUMER_PRIVATE_KEY="0xf307e165339cb5deb2b8ec59c31a5c0a957b8e8453ce7fe8a19d9a4c8acf36d4"
-// RITUAL_ID=0
-// DOMAIN=tapir
-// const domain = process.env.DOMAIN || domains.TESTNET;
-// const ritualId = parseInt(process.env.RITUAL_ID || '0');
-// const provider = new ethers.providers.JsonRpcProvider(rpcProviderUrl);
+rpcProviderUrl = "https://rpc-amoy.polygon.technology"
+encryptorPrivateKey = "0x900edb9e8214b2353f82aa195e915128f419a92cfb8bbc0f4784f10ef4112b86"
+CONSUMER_PRIVATE_KEY="0xf307e165339cb5deb2b8ec59c31a5c0a957b8e8453ce7fe8a19d9a4c8acf36d4"
+ritualId = 0
+domain = "tapir"
+const provider = new ethers.providers.JsonRpcProvider(rpcProviderUrl);
 
 
-// const encryptToBytes = async (messageString: string) => {
-//   const encryptorSigner = new ethers.Wallet(encryptorPrivateKey);
-//   console.log(
-//     "Encryptor signer's address:",
-//     await encryptorSigner.getAddress(),
-//   );
 
-//   const message = toBytes(messageString);
-//   console.log(format('Encrypting message ("%s") ...', messageString));
+async function encryptToBytes(messageString) {
+  const encryptorSigner = new ethers.Wallet(encryptorPrivateKey);
+  console.log(
+    "Encryptor signer's address:",
+    await encryptorSigner.getAddress(),
+  );
 
-//   const hasPositiveBalance = new conditions.base.rpc.RpcCondition({
-//     chain: 80002,
-//     method: 'eth_getBalance',
-//     parameters: [':userAddress', 'latest'],
-//     returnValueTest: {
-//       comparator: '>',
-//       value: 0,
-//     },
-//   });
-//   console.assert(
-//     hasPositiveBalance.requiresSigner(),
-//     'Condition requires signer',
-//   );
+  const message = toBytes(messageString);
+  console.log(format('Encrypting message ("%s") ...', messageString));
+  return message
+  }
 
-//   const messageKit = await encrypt(
-//     provider,
-//     domain,
-//     message,
-//     hasPositiveBalance,
-//     ritualId,
-//     encryptorSigner,
-//   );
+async function decryptFromBytes(encryptedBytes) {
+  const consumerSigner = new ethers.Wallet(consumerPrivateKey);
+  console.log(
+    "\nConsumer signer's address:",
+    await consumerSigner.getAddress(),
+  );
 
-//   return messageKit.toBytes();
-// };
+  const messageKit = ThresholdMessageKit.fromBytes(encryptedBytes);
+  console.log('Decrypting message ...');
+  return decrypt(
+    provider,
+    domain,
+    messageKit,
+    getPorterUri(domain),
+    consumerSigner,
+  );
+}
 
-// const decryptFromBytes = async (encryptedBytes: Uint8Array) => {
-//   const consumerSigner = new ethers.Wallet(consumerPrivateKey);
-//   console.log(
-//     "\nConsumer signer's address:",
-//     await consumerSigner.getAddress(),
-//   );
-
-//   const messageKit = ThresholdMessageKit.fromBytes(encryptedBytes);
-//   console.log('Decrypting message ...');
-//   return decrypt(
-//     provider,
-//     domain,
-//     messageKit,
-//     getPorterUri(domain),
-//     consumerSigner,
-//   );
-// };
 
 describe("Tellor", function() {
   let dlcTaco;
@@ -107,6 +85,10 @@ describe("Tellor", function() {
     console.log("todo - two parties lock funds into contract")
     console.log("todo - both parties send encoded signed message of 'invalid' and 'other party wins' to tACO")
 
+    let _mySecret = "super secret secret....secret"
+    //await initialize();
+    let _bytes = await encryptToBytes(_mySecret);
+    console.log('Ciphertext: ', toHexString(_bytes));
 
     console.log("tellor oracle reports whether bitcoin is Up or Down over the next day")
         const mockValue = true;
