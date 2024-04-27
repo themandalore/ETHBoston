@@ -4,7 +4,7 @@
 // When running the script with `hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
 const { abi, bytecode } = require("usingtellor/artifacts/contracts/TellorPlayground.sol/TellorPlayground.json")
-//  npx hardhat run scripts/deploySampleTellor.js --network   polygon_amoy
+//  npx hardhat run scripts/toggleOracle.js --network   polygon_amoy
 
 async function main() {
   // Hardhat always runs the compile task when running scripts with its command
@@ -13,25 +13,26 @@ async function main() {
   // If this script is run directly using `node` you may want to call compile 
   // manually to make sure everything is compiled
   // await hre.run('compile');
+  const abiCoder = new ethers.utils.AbiCoder();
+  const queryDataArgs = abiCoder.encode(["string"], ["t/f - should we unencrypt video?"]);
+  const queryData= abiCoder.encode(["string", "bytes"], ["StringQuery", queryDataArgs]);
+  const queryId = ethers.utils.keccak256(queryData);
+  const tellorAddy = "0xC866DB9021fe81856fF6c5B3E3514BF9D1593D81"
+  const ethBostonAddy = "0x648e1B652C6FE5887B66267f7594FC9d0d0a7B7C"
 
   var provider = new ethers.providers.JsonRpcProvider(process.env.ALCHEMY_URL);
   let wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider)
   
   ////////////// TellorFlex
-  console.log("Starting deployment for flex contract...")
-  const EthBostonFactory = await ethers.getContractFactory("contracts/EthBoston.sol:EthBoston", wallet)
-  const oracleAddress = "0xC866DB9021fe81856fF6c5B3E3514BF9D1593D81";
-  const EthBoston = await EthBostonFactory.deploy(oracleAddress);
-  await EthBoston.deployed();
-
-  // console.log("Verifying...");
-  // await hre.run("verify:verify", {
-  //   address: EthBoston.address,
-  //   contract: "contracts/EthBoston.sol:EthBoston", //Filename.sol:ClassName
-  // constructorArguments: [oracleAddress],
-  // });
-
-  console.log("EthBoston deployed to:", EthBoston.address);
+  console.log("Toggling oracle.")
+  const ethBoston= await ethers.getContractAt("contracts/EthBoston.sol:EthBoston", ethBostonAddy,wallet)
+  let _currentState = await ethBoston.result.call()
+  let tellorOracle = await ethers.getContractFactory(abi, bytecode);
+  tellorOracle = tellorOracle.attach(tellorAddy);
+  let mockValue = !_currentState;
+  let mockValueBytes = abiCoder.encode(["bool"], [mockValue]);
+  console.log("calling tellor oracle, switching it to: ", mockValue)
+  await tellorOracle.connect(wallet).submitValue(queryId, mockValueBytes, 0,queryData);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

@@ -10,6 +10,8 @@
     "hardhat": "^2.5.0"
   },
   "dependencies": {
+    "@nomicfoundation/hardhat-verify": "^2.0.6",
+    "@nomiclabs/hardhat-etherscan": "^3.1.8",
     "@nucypher/taco": "^0.2.6",
     "usingtellor": "^5.0.4"
   }
