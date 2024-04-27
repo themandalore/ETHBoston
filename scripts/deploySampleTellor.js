@@ -14,16 +14,12 @@ async function main() {
   // manually to make sure everything is compiled
   // await hre.run('compile');
 
-  // We get the contract to deploy
-  let TellorOracle = await ethers.getContractFactory(abi, bytecode);
-  tellorOracle = await TellorOracle.deploy();
-  await tellorOracle.deployed();
 
-  let SampleUsingTellor = await ethers.getContractFactory("SampleUsingTellor");
-  sampleUsingTellor = await SampleUsingTellor.deploy(tellorOracle.address);
-  await sampleUsingTellor.deployed();
+  let EthBoston = await ethers.getContractFactory("EthBoston");
+  EthBoston = await EthBoston.deploy("0xC866DB9021fe81856fF6c5B3E3514BF9D1593D81");
+  await EthBoston.deployed();
 
-  console.log("SampleUsingTellor deployed to:", sampleUsingTellor.address);
+  console.log("EthBoston deployed to:", EthBoston.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
