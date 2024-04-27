@@ -39,4 +39,9 @@ module.exports = {
     cache: "./cache",
     artifacts: "./artifacts"
   },
+  etherscan: {
+    apiKey: {
+      polygon_amoy: process.env.POLYGONSCAN_API_KEY
+    }
+  }
 };
