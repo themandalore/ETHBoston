@@ -4,6 +4,7 @@
 /build
 /artifacts
 /cache
+/frontend/node_modules
 
 .env
 package-lock.json
