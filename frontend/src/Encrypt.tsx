@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import React, { ChangeEventHandler, useRef, useState } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { fileToDataString } from "./utils";
 
 interface Props {
   enabled: boolean;
@@ -11,10 +12,23 @@ export const Encrypt = ({ encrypt, encryptedMessageId, enabled }: Props) => {
   if (!enabled) {
     return <></>;
   }
+  const [imageSrc, setImageSrc] = useState<string>("");
+  const onClick = () => encrypt(imageSrc);
 
-  const [plaintext, setPlaintext] = useState('plaintext');
+  const handleChangeFile: ChangeEventHandler<HTMLInputElement> = async (e) => {
+    console.log("file change");
+    const file = e.target.files?.[0]
 
-  const onClick = () => encrypt(plaintext);
+    if (!file) {
+      return
+    }
+    
+    try {
+      setImageSrc(await fileToDataString(file));
+    } catch(e) {
+      console.error(e);
+    }
+  };
 
   const EncryptedMessageIdContent = () => {
     if (!encryptedMessageId) {
@@ -37,11 +51,8 @@ export const Encrypt = ({ encrypt, encryptedMessageId, enabled }: Props) => {
   return (
     <div>
       <h2>Step 2 - Set conditions and Encrypt a message</h2>
-      <input
-        type="string"
-        value={plaintext}
-        onChange={(e) => setPlaintext(e.currentTarget.value)}
-      />
+      <input type="file" onChange={handleChangeFile} accept="image/*"/>
+      <img src={imageSrc} />
       <button onClick={onClick}>Encrypt</button>
       {EncryptedMessageIdContent()}
     </div>

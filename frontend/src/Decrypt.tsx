@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 interface Props {
   enabled: boolean;
   decrypt: (encryptedMessageId: string) => void;
-  decryptedMessage?: string | undefined;
+  decryptedImage?: string | undefined;
   decryptionErrors: string[];
 }
 
 export const Decrypt = ({
   decrypt,
-  decryptedMessage,
+  decryptedImage,
   decryptionErrors,
   enabled,
 }: Props) => {
@@ -27,13 +27,13 @@ export const Decrypt = ({
   };
 
   const DecryptedMessage = () => {
-    if (!decryptedMessage) {
+    if (!decryptedImage) {
       return <></>;
     }
     return (
       <>
         <h3>Decrypted Message:</h3>
-        <p>{decryptedMessage}</p>
+        <img src={decryptedImage} />
       </>
     );
   };

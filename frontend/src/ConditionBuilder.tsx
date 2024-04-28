@@ -22,27 +22,27 @@ const getResultAbi: conditions.base.contract.FunctionAbiProps = {
   ],
 }
 
-const getResultCondition = new conditions.base.contract.ContractCondition({
-  method: 'getResult',
-  parameters: [],
-  functionAbi: getResultAbi,
-  contractAddress: "0x3314BEA4999C448C16E7A3567E5bdf93CB20a793",
+// const getResultCondition = new conditions.base.contract.ContractCondition({
+//   method: 'getResult',
+//   parameters: [],
+//   functionAbi: getResultAbi,
+//   contractAddress: "0x3314BEA4999C448C16E7A3567E5bdf93CB20a793",
+//   chain: 80002,
+//   returnValueTest: {
+//     comparator: '>',
+//     value: 0,
+//   },
+// });
+
+const rpcCondition = new conditions.base.rpc.RpcCondition({
   chain: 80002,
+  method: 'eth_getBalance',
+  parameters: [':userAddress'],
   returnValueTest: {
     comparator: '>',
     value: 0,
   },
 });
-
-// const rpcCondition = new conditions.base.rpc.RpcCondition({
-//   chain: 80002,
-//   method: 'eth_getBalance',
-//   parameters: [':userAddress'],
-//   returnValueTest: {
-//     comparator: '>',
-//     value: 10,
-//   },
-// });
 
 export const ConditionBuilder = ({
   condition,
@@ -51,7 +51,7 @@ export const ConditionBuilder = ({
 }: Props) => {
   const { library } = useEthers();
 
-  const demoCondition = JSON.stringify((condition ?? getResultCondition).toObj());
+  const demoCondition = JSON.stringify((condition ?? rpcCondition).toObj());
   const [conditionString, setConditionString] = useState(demoCondition);
 
   if (!enabled || !library) {
@@ -80,7 +80,7 @@ export const ConditionBuilder = ({
 
   const conditionJSONInput = makeInput(
     setConditionString,
-    JSON.stringify(getResultCondition.toObj()),
+    JSON.stringify(rpcCondition.toObj()),
   );
 
   const onCreateCondition = (e: any) => {
