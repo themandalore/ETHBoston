@@ -33,6 +33,7 @@ export default function App() {
   const [encryptedMessageId, setEncryptedMessageIdId] = useState<string>();
   const [decryptedImage, setDecryptedImage] = useState<string>();
   const [decryptionErrors, setDecryptionErrors] = useState<string[]>([]);
+  const [decryptionFailureMessage, setDecryptionFailureMessage] = useState<string>("");
   const ritualId = 0;
   const domain = domains.TESTNET;
 
@@ -73,6 +74,7 @@ export default function App() {
     if (!condition) {
       return;
     }
+    console.log("1")
     setLoading(true);
     setDecryptedImage("");
     setDecryptionErrors([]);
@@ -84,15 +86,22 @@ export default function App() {
       Buffer.from(encryptedMessageHex, "hex")
     );
 
-    const decryptedMessage = await decrypt(
+    console.log("2")
+
+    try {
+      const decryptedMessage = await decrypt(
       provider,
       domain,
       encryptedMessage,
       getPorterUri(domain),
       provider.getSigner()
-    );
+      );
 
-    setDecryptedImage(new TextDecoder().decode(decryptedMessage));
+      setDecryptedImage(new TextDecoder().decode(decryptedMessage));
+    } catch (e) {
+      setDecryptionFailureMessage("Failed to validate condition");
+    }
+
     setLoading(false);
   };
 
@@ -132,6 +141,7 @@ export default function App() {
         decrypt={decryptMessage}
         decryptedImage={decryptedImage}
         decryptionErrors={decryptionErrors}
+        decryptionFailure={decryptionFailureMessage}
       />
     </div>
   );

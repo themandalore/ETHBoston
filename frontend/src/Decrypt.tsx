@@ -5,12 +5,14 @@ interface Props {
   decrypt: (encryptedMessageId: string) => void;
   decryptedImage?: string | undefined;
   decryptionErrors: string[];
+  decryptionFailure: string;
 }
 
 export const Decrypt = ({
   decrypt,
   decryptedImage,
   decryptionErrors,
+  decryptionFailure,
   enabled,
 }: Props) => {
   const [encryptedMessageId, setEncryptedMessageId] = useState('');
@@ -34,6 +36,20 @@ export const Decrypt = ({
       <>
         <h3>Decrypted Message:</h3>
         <img src={decryptedImage} />
+      </>
+    );
+  };
+
+  const DecryptionFailureMessage = () => {
+    if (!decryptionFailure) {
+      return <></>;
+    }
+    return (
+      <>
+        <h3>Decryption Failure:</h3>
+        <p>
+          {decryptionFailure}
+        </p>
       </>
     );
   };
@@ -68,6 +84,7 @@ export const Decrypt = ({
       <button onClick={onDecrypt}>Decrypt</button>
       {DecryptedMessage()}
       {DecryptionErrors()}
+      {DecryptionFailureMessage()}
     </div>
   );
 };

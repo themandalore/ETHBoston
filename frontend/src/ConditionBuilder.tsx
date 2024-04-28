@@ -22,27 +22,27 @@ const getResultAbi: conditions.base.contract.FunctionAbiProps = {
   ],
 }
 
-// const getResultCondition = new conditions.base.contract.ContractCondition({
-//   method: 'getResult',
-//   parameters: [],
-//   functionAbi: getResultAbi,
-//   contractAddress: "0x3314BEA4999C448C16E7A3567E5bdf93CB20a793",
-//   chain: 80002,
-//   returnValueTest: {
-//     comparator: '>',
-//     value: 0,
-//   },
-// });
-
-const rpcCondition = new conditions.base.rpc.RpcCondition({
+const getResultCondition = new conditions.base.contract.ContractCondition({
+  method: 'getResult',
+  parameters: [],
+  functionAbi: getResultAbi,
+  contractAddress: "0x3314BEA4999C448C16E7A3567E5bdf93CB20a793",
   chain: 80002,
-  method: 'eth_getBalance',
-  parameters: [':userAddress'],
   returnValueTest: {
     comparator: '>',
     value: 0,
   },
 });
+
+// const rpcCondition = new conditions.base.rpc.RpcCondition({
+//   chain: 80002,
+//   method: 'eth_getBalance',
+//   parameters: [':userAddress'],
+//   returnValueTest: {
+//     comparator: '>',
+//     value: 0,
+//   },
+// });
 
 export const ConditionBuilder = ({
   condition,
@@ -51,7 +51,7 @@ export const ConditionBuilder = ({
 }: Props) => {
   const { library } = useEthers();
 
-  const demoCondition = JSON.stringify((condition ?? rpcCondition).toObj());
+  const demoCondition = JSON.stringify((condition ?? getResultCondition).toObj());
   const [conditionString, setConditionString] = useState(demoCondition);
 
   if (!enabled || !library) {
@@ -80,7 +80,7 @@ export const ConditionBuilder = ({
 
   const conditionJSONInput = makeInput(
     setConditionString,
-    JSON.stringify(rpcCondition.toObj()),
+    JSON.stringify(getResultCondition.toObj()),
   );
 
   const onCreateCondition = (e: any) => {
@@ -94,15 +94,15 @@ export const ConditionBuilder = ({
 
   return (
     <>
-      <h2>Step 1 - Create A Conditioned Access Policy</h2>
+      <h2>Ready to get Started?</h2>
       <div>
-        <div>
+        {/* <div>
           <h3>Customize your Conditions</h3>
           <div>
             <h3>Condition JSON</h3>
             {conditionJSONInput}
           </div>
-        </div>
+        </div> */}
         <button onClick={onCreateCondition}>Create Conditions</button>
       </div>
     </>
