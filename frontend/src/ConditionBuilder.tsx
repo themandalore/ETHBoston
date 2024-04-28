@@ -8,20 +8,6 @@ interface Props {
   enabled: boolean;
 }
 
-// const getResultAbi: conditions.base.contract.FunctionAbiProps = {
-//   name: "getResult",
-//   type: "function",
-//   stateMutability: "view",
-//   inputs: [],
-//   outputs: [
-//     {
-//       "internalType": "bool",
-//       "name": "",
-//       "type": "bool"
-//     }
-//   ],
-// }
-
 const getResultAbi: conditions.base.contract.FunctionAbiProps = {
   inputs: [],
   name: "getResult",

@@ -53,6 +53,7 @@ export const Encrypt = ({ encrypt, encryptedMessageId, enabled }: Props) => {
       <h2>Image Encryption</h2>
       <input type="file" onChange={handleChangeFile} accept="image/*"/>
       <img src={imageSrc} />
+      <br />
       <button onClick={onClick}>Encrypt</button>
       {EncryptedMessageIdContent()}
     </div>

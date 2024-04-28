@@ -42,6 +42,9 @@ npx hardhat run --network <your-network> scripts/deployReconNetwork.js
 
 This repository was created as part of the ETHBoston 2024 hackathon.
 
+#### Video Demo:
+https://youtu.be/NFpgUmLDmxw
+
 
 #### Copyright
 
