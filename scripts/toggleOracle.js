@@ -33,6 +33,8 @@ async function main() {
   let mockValueBytes = abiCoder.encode(["bool"], [mockValue]);
   console.log("calling tellor oracle, switching it to: ", mockValue)
   await tellorOracle.connect(wallet).submitValue(queryId, mockValueBytes, 0,queryData);
+  console.log("answering question")
+  await ethBoston.connect(wallet).answerQuestion();
 }
 
 // We recommend this pattern to be able to use async/await everywhere
