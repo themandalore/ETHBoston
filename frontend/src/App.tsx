@@ -10,6 +10,7 @@ import AppPage from "./apppage";
 export default function App() {
   return (
     <Router>
+      <h2>Recon Network</h2>
       <div className="bg-gray-800 min-h-screen text-white">
         <Navigation />
         <div className="container mx-auto pt-4">
