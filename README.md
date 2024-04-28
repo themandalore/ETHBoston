@@ -1,5 +1,5 @@
 <p align="center">
-    <img src= './public/target.png' width="250" height="200" alt='tellor.io' />
+    <img src= './public/target.png' width="250" alt='tellor.io' />
 </p>
 
 ## recon.network <a name="sample"> </a>
