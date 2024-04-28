@@ -1,0 +1,1 @@
+{"version":3,"file":"mineBlock.js","sourceRoot":"","sources":["../../../../../src/testing/utils/mineBlock.ts"],"names":[],"mappings":";;;AAAA,mCAA0C;AAEnC,MAAM,SAAS,GAAG,KAAK,EAAE,MAAc,EAAE,EAAE;IAChD,MAAM,EAAE,GAAG,MAAM,MAAM,CAAC,eAAe,CAAC,EAAE,EAAE,EAAE,kBAAS,CAAC,WAAW,EAAE,KAAK,EAAE,CAAC,EAAE,CAAC,CAAA;IAChF,MAAM,EAAE,CAAC,IAAI,EAAE,CAAA;AACjB,CAAC,CAAA;AAHY,QAAA,SAAS,aAGrB"}

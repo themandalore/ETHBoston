@@ -1,0 +1,1 @@
+{"version":3,"file":"constants.js","sourceRoot":"","sources":["../../../../../src/abi/multicall2/constants.ts"],"names":[],"mappings":";;;;;;AAAA,mCAA8B;AAC9B,0FAA4D;AAE/C,QAAA,SAAS,GAAG,IAAI,cAAK,CAAC,SAAS,CAAC,yBAAU,CAAC,GAAG,CAAC,CAAA;AAE/C,QAAA,WAAW,GAAG,GAAG,CAAC,MAAM,CAAC,EAAE,CAAC,GAAG,GAAG,CAAA;AAClC,QAAA,YAAY,GAAG,GAAG,CAAC,MAAM,CAAC,EAAE,CAAC,GAAG,GAAG,CAAA"}
