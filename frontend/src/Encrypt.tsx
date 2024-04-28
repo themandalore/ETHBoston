@@ -38,7 +38,7 @@ export const Encrypt = ({ encrypt, encryptedMessageId, enabled }: Props) => {
     return (
       <>
         <div>
-          <h3>Encrypted message id:</h3>
+          <h3>Encrypted image id:</h3>
           <pre className="encryptedMessageId">{encryptedMessageId}</pre>
           <CopyToClipboard text={encryptedMessageId}>
             <button>Copy to clipboard</button>
@@ -50,7 +50,7 @@ export const Encrypt = ({ encrypt, encryptedMessageId, enabled }: Props) => {
 
   return (
     <div>
-      <h2>Step 2 - Set conditions and Encrypt a message</h2>
+      <h2>Image Encryption</h2>
       <input type="file" onChange={handleChangeFile} accept="image/*"/>
       <img src={imageSrc} />
       <button onClick={onClick}>Encrypt</button>
