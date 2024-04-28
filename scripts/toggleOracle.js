@@ -18,7 +18,7 @@ async function main() {
   const queryData= abiCoder.encode(["string", "bytes"], ["StringQuery", queryDataArgs]);
   const queryId = ethers.utils.keccak256(queryData);
   const tellorAddy = "0xC866DB9021fe81856fF6c5B3E3514BF9D1593D81"
-  const ethBostonAddy = "0x648e1B652C6FE5887B66267f7594FC9d0d0a7B7C"
+  const ethBostonAddy = "0xF1CE255bd4759EE2ef487a5E6F918AAC75e82735"
 
   var provider = new ethers.providers.JsonRpcProvider(process.env.ALCHEMY_URL);
   let wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider)

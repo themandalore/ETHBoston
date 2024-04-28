@@ -318,9 +318,12 @@ contract EthBoston is UsingTellor {
 
     constructor(address payable _tellorAddress) UsingTellor(_tellorAddress) {}
 
-    function getResult() external view returns(bool){
+    function getResult() external view returns(uint256){
         require(lastStoredTimestamp > 0, "must answer question first");
-        return result;
+        if(result){
+            return 1;
+        }
+        return 0;
     }
 
     function answerQuestion() external{
