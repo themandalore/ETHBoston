@@ -1,0 +1,1 @@
+{"version":3,"file":"useToken.d.ts","sourceRoot":"","sources":["../../../../src/hooks/useToken.ts"],"names":[],"mappings":"AAAA,OAAO,EAAkB,WAAW,EAAE,MAAM,cAAc,CAAA;AAC1D,OAAO,EAAE,KAAK,EAAE,MAAM,gBAAgB,CAAA;AACtC,OAAO,EAAE,SAAS,EAAE,MAAM,oBAAoB,CAAA;AAI9C;;;;;;;;;;;;;;;;;;GAkBG;AACH,wBAAgB,QAAQ,CAAC,YAAY,EAAE,MAAM,GAAG,KAAK,EAAE,WAAW,GAAE,WAAgB,GAAG,SAAS,GAAG,SAAS,CAqB3G"}

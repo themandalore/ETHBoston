@@ -1,0 +1,1 @@
+{"version":3,"file":"isWebSocketProvider.js","sourceRoot":"","sources":["../../../../src/helpers/isWebSocketProvider.ts"],"names":[],"mappings":";;;AAAA,mCAAkC;AAE3B,MAAM,mBAAmB,GAAG,CAAC,QAAa,EAAE,EAAE;IACnD,OAAO,QAAQ,YAAY,kBAAS,CAAC,iBAAiB,IAAI,CAAC,CAAC,QAAQ,CAAC,UAAU,CAAA,CAAC,2CAA2C;AAC7H,CAAC,CAAA;AAFY,QAAA,mBAAmB,uBAE/B"}

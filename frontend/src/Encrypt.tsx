@@ -53,7 +53,8 @@ export const Encrypt = ({ encrypt, encryptedMessageId, enabled }: Props) => {
       <h2>Image Encryption</h2>
       <input type="file" onChange={handleChangeFile} accept="image/*"/>
       <img src={imageSrc} />
-      <button onClick={onClick}>Encrypt</button>
+      <br />
+      <button onClick={onClick}>Encrypt and Upload to Arweave</button>
       {EncryptedMessageIdContent()}
     </div>
   );

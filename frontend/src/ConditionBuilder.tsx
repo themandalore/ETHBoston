@@ -8,41 +8,55 @@ interface Props {
   enabled: boolean;
 }
 
+// const getResultAbi: conditions.base.contract.FunctionAbiProps = {
+//   name: "getResult",
+//   type: "function",
+//   stateMutability: "view",
+//   inputs: [],
+//   outputs: [
+//     {
+//       "internalType": "bool",
+//       "name": "",
+//       "type": "bool"
+//     }
+//   ],
+// }
+
 const getResultAbi: conditions.base.contract.FunctionAbiProps = {
-  name: "getResult",
-  type: "function",
-  stateMutability: "view",
   inputs: [],
+  name: "getResult",
   outputs: [
     {
-      "internalType": "bool",
+      "internalType": "uint256",
       "name": "",
-      "type": "bool"
+      "type": "uint256"
     }
   ],
-}
+  stateMutability: "view",
+  type: "function"
+};
 
-// const getResultCondition = new conditions.base.contract.ContractCondition({
-//   method: 'getResult',
-//   parameters: [],
-//   functionAbi: getResultAbi,
-//   contractAddress: "0x3314BEA4999C448C16E7A3567E5bdf93CB20a793",
-//   chain: 80002,
-//   returnValueTest: {
-//     comparator: '>',
-//     value: 0,
-//   },
-// });
-
-const rpcCondition = new conditions.base.rpc.RpcCondition({
+const getResultCondition = new conditions.base.contract.ContractCondition({
+  method: 'getResult',
+  parameters: [],
+  functionAbi: getResultAbi,
+  contractAddress: "0xF1CE255bd4759EE2ef487a5E6F918AAC75e82735",
   chain: 80002,
-  method: 'eth_getBalance',
-  parameters: [':userAddress'],
   returnValueTest: {
     comparator: '>',
     value: 0,
   },
 });
+
+// const rpcCondition = new conditions.base.rpc.RpcCondition({
+//   chain: 80002,
+//   method: 'eth_getBalance',
+//   parameters: [':userAddress'],
+//   returnValueTest: {
+//     comparator: '>',
+//     value: 0,
+//   },
+// });
 
 export const ConditionBuilder = ({
   condition,
@@ -51,7 +65,7 @@ export const ConditionBuilder = ({
 }: Props) => {
   const { library } = useEthers();
 
-  const demoCondition = JSON.stringify((condition ?? rpcCondition).toObj());
+  const demoCondition = JSON.stringify((condition ?? getResultCondition).toObj());
   const [conditionString, setConditionString] = useState(demoCondition);
 
   if (!enabled || !library) {
@@ -80,7 +94,7 @@ export const ConditionBuilder = ({
 
   const conditionJSONInput = makeInput(
     setConditionString,
-    JSON.stringify(rpcCondition.toObj()),
+    JSON.stringify(getResultCondition.toObj()),
   );
 
   const onCreateCondition = (e: any) => {
