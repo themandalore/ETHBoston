@@ -1,4 +1,5 @@
 require("@nomiclabs/hardhat-ethers");
+//require("@nomicfoundation/hardhat-toolbox")
 require("dotenv").config();
 
 // This is a sample Hardhat task. To learn how to create your own go to
@@ -15,7 +16,7 @@ task("accounts", "Prints the list of accounts", async () => {
 // Go to https://hardhat.org/config/ to learn more
 
 module.exports = {
-  defaultNetwork: "polygon_amoy",
+  //defaultNetwork: "polygon_amoy",
   networks: {
     polygon_amoy: {
       url: process.env.ALCHEMY_URL,
@@ -25,7 +26,7 @@ module.exports = {
     },
   },
   solidity: {
-    version: "0.8.24",
+    version: "0.8.4",
     settings: {
       optimizer: {
         enabled: true,
