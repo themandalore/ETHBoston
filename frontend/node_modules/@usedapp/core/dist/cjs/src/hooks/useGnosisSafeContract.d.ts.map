@@ -1,1 +1,0 @@
-{"version":3,"file":"useGnosisSafeContract.d.ts","sourceRoot":"","sources":["../../../../src/hooks/useGnosisSafeContract.ts"],"names":[],"mappings":"AACA,OAAO,KAAK,EAAE,MAAM,EAAE,SAAS,EAAE,MAAM,QAAQ,CAAA;AAC/C,OAAO,EAAE,QAAQ,EAAE,MAAM,QAAQ,CAAA;AAGjC;;GAEG;AACH,eAAO,MAAM,qBAAqB,YACvB,MAAM,GAAG,SAAS,YACjB,MAAM,GAAG,UAAU,QAAQ,GAAG,SAAS;;CAwBlD,CAAA"}
